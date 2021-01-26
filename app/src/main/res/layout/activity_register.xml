@@ -109,12 +109,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_login_splashLogin"
+                android:id="@+id/button_createAccount_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_med"
                 android:backgroundTint="@color/login_button"
-                android:text="@string/login" />
+                android:text="@string/create_account" />
 
         </LinearLayout>
 

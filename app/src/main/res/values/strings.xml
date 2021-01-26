@@ -11,4 +11,10 @@
     <string name="remember">Remember</string>
     <string name="login">Log In</string>
     <string name="create_account">Create Account</string>
+
+<!--    Error Mensage-->
+    <string name="email_error">Need a email</string>
+    <string name="password_error">Need a password</string>
+    <string name="name_error">Need a name</string>
+    <string name="repeat_password_error">Needs to be the same</string>
 </resources>
