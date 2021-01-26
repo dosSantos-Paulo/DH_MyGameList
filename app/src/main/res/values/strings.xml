@@ -17,4 +17,10 @@
     <string name="password_error">Need a password</string>
     <string name="name_error">Need a name</string>
     <string name="repeat_password_error">Needs to be the same</string>
+    <string name="float_action_button_add">Float Action Button Add</string>
+    <string name="search_hint">Seach Games</string>
+
+<!--    Card Example-->
+    <string name="card_game_name_example">MORTAL KOMBAT X</string>
+    <string name="card_game_created_example">2018</string>
 </resources>

@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
-import com.devdossantos.mygamelist.MainActivity
 import com.devdossantos.mygamelist.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class SplashLoginActivity : AppCompatActivity() {

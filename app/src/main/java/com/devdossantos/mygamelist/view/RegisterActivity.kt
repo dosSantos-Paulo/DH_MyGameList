@@ -3,7 +3,6 @@ package com.devdossantos.mygamelist.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.devdossantos.mygamelist.MainActivity
 import com.devdossantos.mygamelist.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout

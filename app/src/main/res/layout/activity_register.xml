@@ -44,13 +44,13 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/name_hint"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:hintTextColor="@color/login_hint">
+                app:hintTextColor="@color/gray_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:textColor="@color/login_text" />
+                    android:textColor="@color/blue_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,13 +62,13 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/email_hint"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:hintTextColor="@color/login_hint">
+                app:hintTextColor="@color/gray_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/login_text" />
+                    android:textColor="@color/blue_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,13 +80,13 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/password_hint"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:hintTextColor="@color/login_hint">
+                app:hintTextColor="@color/gray_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:textColor="@color/login_text" />
+                    android:textColor="@color/blue_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,13 +98,13 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/repeat_password_hint"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:hintTextColor="@color/login_hint">
+                app:hintTextColor="@color/gray_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:textColor="@color/login_text" />
+                    android:textColor="@color/blue_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -3,10 +3,12 @@
     <color name="colorPrimary">#8492A6</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#FF5252</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="background">#DDDDDD</color>
 
 <!--    Text Collors-->
-    <color name="login_text">#009688</color>
-    <color name="login_hint">#8492A6</color>
+    <color name="blue_text">#009688</color>
+    <color name="gray_text">#8492A6</color>
 
 <!--    Buttons Collors-->
     <color name="login_button">#FF5252</color>
