@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">MyGameList</string>
     <string name="splashscreen_background_image">SplashScreen Background Image</string>
+
+<!--    Hints-->
     <string name="email_hint">Email</string>
-    <string name="password">Password</string>
+    <string name="password_hint">Password</string>
+    <string name="repeat_password_hint">Repeat Password</string>
+    <string name="name_hint">Name</string>
+
     <string name="remember">Remember</string>
     <string name="login">Log In</string>
     <string name="create_account">Create Account</string>
