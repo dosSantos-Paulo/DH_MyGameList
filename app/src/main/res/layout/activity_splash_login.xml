@@ -7,10 +7,10 @@
     tools:context=".view.SplashLoginActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/background_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="1"
+        android:alpha="0"
         android:contentDescription="@string/splashscreen_background_image"
         android:scaleType="centerCrop"
         android:src="@drawable/background"
@@ -20,8 +20,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_splashLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:alpha="0"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
         app:cardCornerRadius="@dimen/card_radius_default"
