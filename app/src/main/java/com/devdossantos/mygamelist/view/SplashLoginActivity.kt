@@ -1,11 +1,13 @@
 package com.devdossantos.mygamelist.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import com.devdossantos.mygamelist.R
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
 class SplashLoginActivity : AppCompatActivity() {
@@ -14,10 +16,23 @@ class SplashLoginActivity : AppCompatActivity() {
 
     private val _cardView by lazy { findViewById<MaterialCardView>(R.id.cardView_splashLogin) }
 
+    private val _createAcountButton by lazy { findViewById<MaterialButton>(R.id.button_createAccount_splashLogin) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_login)
 
+        splashScreenAnimation()
+
+        _createAcountButton.setOnClickListener {
+            intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
+    }
+
+    private fun splashScreenAnimation() {
         _background.animate().apply {
             alpha(1f)
             duration = 1500
@@ -29,7 +44,5 @@ class SplashLoginActivity : AppCompatActivity() {
                 duration = 1000
             }
         }, 3000)
-
-
     }
 }

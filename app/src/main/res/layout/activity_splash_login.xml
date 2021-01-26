@@ -44,7 +44,6 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/email_hint"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeWidth="0dp"
                 app:hintTextColor="@color/login_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +62,6 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/password_hint"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeWidth="0dp"
                 app:hintTextColor="@color/login_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
