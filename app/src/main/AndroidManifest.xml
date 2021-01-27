@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.addreview.AddActivity"></activity>
+        <activity android:name=".view.gamedetail.DetailActivity"></activity>
+        <activity android:name=".view.addreview.AddActivity" />
         <activity android:name=".view.register.RegisterActivity" />
         <activity android:name=".view.splash.SplashLoginActivity">
             <intent-filter>

@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF5252</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="background">#DDDDDD</color>
+    <color name="translucent">#00FFFFFF</color>
+    <color name="black">#1B1B1B</color>
 
 <!--    Text Collors-->
     <color name="blue_text">#009688</color>

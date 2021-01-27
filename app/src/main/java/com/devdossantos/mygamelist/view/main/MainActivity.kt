@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devdossantos.mygamelist.R
 import com.devdossantos.mygamelist.gamereview.model.GameReviewModel
 import com.devdossantos.mygamelist.view.addreview.AddActivity
+import com.devdossantos.mygamelist.view.gamedetail.DetailActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,14 @@ class MainActivity : AppCompatActivity() {
     private val _layoutManager = GridLayoutManager(this, 2)
 
     private val _listAdapter = GameListAdapter(_gamesList) {
-        Toast.makeText(this, "Name: ${it.name}", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, DetailActivity::class.java)
+
+        intent.putExtra("NAME",it.name)
+        intent.putExtra("IMAGE",it.imageUri)
+        intent.putExtra("DESCRIPTION",it.description)
+        intent.putExtra("CREATED",it.createdAt.toString())
+
+        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
