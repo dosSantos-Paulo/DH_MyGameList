@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.devdossantos.mygamelist.R
 import com.devdossantos.mygamelist.util.Constants.CONTEXT_RESQUEST_CODE
@@ -21,7 +20,9 @@ import com.squareup.picasso.Picasso
 
 class AddActivity : AppCompatActivity() {
 
-    private var imageUri: Uri? = null
+    private var _imageUri: Uri? = null
+
+    private var _imageValidator: Boolean = false
 
     private val _title by lazy { findViewById<TextInputLayout>(R.id.textFile_name_add) }
 
@@ -72,7 +73,7 @@ class AddActivity : AppCompatActivity() {
             if (_description.editText?.text.isNullOrEmpty()) {
                 _description.error = getString(R.string.description_error)
             }
-            if (imageUri == null) {
+            if (!_imageValidator) {
                 Snackbar.make(
                     it, "Replace a picture!!",
                     Snackbar.LENGTH_LONG
@@ -82,7 +83,7 @@ class AddActivity : AppCompatActivity() {
             if (!_title.editText?.text.isNullOrEmpty() &&
                 !_createdAt.editText?.text.isNullOrEmpty() &&
                 !_description.editText?.text.isNullOrEmpty() &&
-                imageUri != null
+                _imageValidator
             ) {
                 Toast.makeText(this, "Send", Toast.LENGTH_LONG).show()
                 startActivity(Intent(this, MainActivity::class.java))
@@ -96,9 +97,10 @@ class AddActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == CONTEXT_RESQUEST_CODE && resultCode == RESULT_OK) {
-            imageUri = data?.data
+            _imageUri = data?.data
             _coverIcon.animate().alpha(0f)
-            Picasso.get().load(imageUri).into(_image)
+            _imageValidator = true
+            Picasso.get().load(_imageUri).into(_image)
         }
     }
 
@@ -114,6 +116,7 @@ class AddActivity : AppCompatActivity() {
         }
         if (_bundleImageUrl != null) {
             _coverIcon.alpha = 0f
+           _imageValidator = true
             Picasso.get().load(_bundleImageUrl).into(_image)
         }
     }

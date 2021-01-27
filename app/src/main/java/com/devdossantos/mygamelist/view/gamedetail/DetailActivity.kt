@@ -58,10 +58,10 @@ class DetailActivity : AppCompatActivity() {
         _editButton.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
 
-            intent.putExtra("NAME",_bundleTitle)
-            intent.putExtra("IMAGE",_bundleImageUrl)
-            intent.putExtra("DESCRIPTION", _bundleDescription)
-            intent.putExtra("CREATED", _bundleCreatedAt)
+            intent.putExtra(NAME,_bundleTitle)
+            intent.putExtra(IMAGE,_bundleImageUrl)
+            intent.putExtra(DESCRIPTION, _bundleDescription)
+            intent.putExtra(CREATED_AT, _bundleCreatedAt)
 
             startActivity(intent)
         }
