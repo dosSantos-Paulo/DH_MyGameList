@@ -31,6 +31,8 @@
         app:layout_constraintTop_toTopOf="@+id/cardView_splashLogin"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_camera_add"
+        android:alpha="1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:elevation="12dp"
@@ -90,7 +92,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="date"
                     android:textColor="@color/blue_text" />
 
             </com.google.android.material.textfield.TextInputLayout>

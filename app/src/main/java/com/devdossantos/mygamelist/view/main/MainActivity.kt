@@ -3,11 +3,14 @@ package com.devdossantos.mygamelist.view.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devdossantos.mygamelist.R
 import com.devdossantos.mygamelist.gamereview.model.GameReviewModel
+import com.devdossantos.mygamelist.util.Constants.CREATED_AT
+import com.devdossantos.mygamelist.util.Constants.DESCRIPTION
+import com.devdossantos.mygamelist.util.Constants.IMAGE
+import com.devdossantos.mygamelist.util.Constants.NAME
 import com.devdossantos.mygamelist.view.addreview.AddActivity
 import com.devdossantos.mygamelist.view.gamedetail.DetailActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,10 +28,10 @@ class MainActivity : AppCompatActivity() {
     private val _listAdapter = GameListAdapter(_gamesList) {
         val intent = Intent(this, DetailActivity::class.java)
 
-        intent.putExtra("NAME",it.name)
-        intent.putExtra("IMAGE",it.imageUri)
-        intent.putExtra("DESCRIPTION",it.description)
-        intent.putExtra("CREATED",it.createdAt.toString())
+        intent.putExtra(NAME,it.name)
+        intent.putExtra(IMAGE,it.imageUri)
+        intent.putExtra(DESCRIPTION,it.description)
+        intent.putExtra(CREATED_AT,it.createdAt.toString())
 
         startActivity(intent)
     }
@@ -53,14 +56,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun createFakeList(amout: Int) {
+    private fun createFakeList(amount: Int) {
 
-        for (i in 1..amout) {
+        for (i in 1..amount) {
             _gamesList.add(
                 GameReviewModel(
                     "null",
                     "Teste",
-                    2020,
+                    "2020",
                     "Super game, criado para ser Fake"
                 )
             )

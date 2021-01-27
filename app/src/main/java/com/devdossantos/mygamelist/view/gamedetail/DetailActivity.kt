@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.devdossantos.mygamelist.R
+import com.devdossantos.mygamelist.util.Constants.CREATED_AT
+import com.devdossantos.mygamelist.util.Constants.DESCRIPTION
+import com.devdossantos.mygamelist.util.Constants.IMAGE
+import com.devdossantos.mygamelist.util.Constants.NAME
 import com.devdossantos.mygamelist.view.addreview.AddActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -37,10 +41,10 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        _bundleTitle = intent.getStringExtra("NAME").toString()
-        _bundleImageUrl = intent.getStringExtra("IMAGE").toString()
-        _bundleCreatedAt = intent.getStringExtra("CREATED").toString()
-        _bundleDescription = intent.getStringExtra("DESCRIPTION").toString()
+        _bundleTitle = intent.getStringExtra(NAME).toString()
+        _bundleImageUrl = intent.getStringExtra(IMAGE).toString()
+        _bundleCreatedAt = intent.getStringExtra(CREATED_AT).toString()
+        _bundleDescription = intent.getStringExtra(DESCRIPTION).toString()
 
         _title1.text = _bundleTitle
         _title2.text = _bundleTitle
