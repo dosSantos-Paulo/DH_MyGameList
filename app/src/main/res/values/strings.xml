@@ -2,7 +2,7 @@
     <string name="app_name">MyGameList</string>
     <string name="splashscreen_background_image">SplashScreen Background Image</string>
 
-<!--    Hints-->
+    <!--    Hints-->
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="repeat_password_hint">Repeat Password</string>
@@ -12,7 +12,7 @@
     <string name="login">Log In</string>
     <string name="create_account">Create Account</string>
 
-<!--    Error Mensage-->
+    <!--    Error Mensage-->
     <string name="email_error">Need a email</string>
     <string name="password_error">Need a password</string>
     <string name="name_error">Need a name</string>
@@ -20,7 +20,10 @@
     <string name="float_action_button_add">Float Action Button Add</string>
     <string name="search_hint">Seach Games</string>
 
-<!--    Card Example-->
+    <!--    Card Example-->
     <string name="card_game_name_example">MORTAL KOMBAT X</string>
     <string name="card_game_created_example">2018</string>
+    <string name="description_hint">Description</string>
+    <string name="create_at_hint">Create at</string>
+    <string name="save_game">Save Game</string>
 </resources>

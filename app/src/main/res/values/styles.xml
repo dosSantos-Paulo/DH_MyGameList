@@ -7,4 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.RoundedImage" parent="Theme.AppCompat"/>
+
 </resources>
