@@ -31,7 +31,7 @@ class DetailActivity : AppCompatActivity() {
 
     private val _arrowBack by lazy { findViewById<ImageView>(R.id.arrowBack_details) }
 
-    private val _editButton by lazy { findViewById<FloatingActionButton>(R.id.arrowBack_details) }
+    private val _editButton by lazy { findViewById<FloatingActionButton>(R.id.fab_edit_detail) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
