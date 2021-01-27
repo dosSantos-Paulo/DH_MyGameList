@@ -60,7 +60,7 @@
             android:padding="@dimen/margin_default">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFile_name_register"
+                android:id="@+id/textFile_name_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
@@ -78,7 +78,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField_email_register"
+                android:id="@+id/textField_createdAt_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
