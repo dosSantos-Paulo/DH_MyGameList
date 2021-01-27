@@ -1,9 +1,10 @@
-package com.devdossantos.mygamelist.view
+package com.devdossantos.mygamelist.view.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.devdossantos.mygamelist.R
+import com.devdossantos.mygamelist.view.main.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 

@@ -4,4 +4,5 @@
     <dimen name="margin_med">26dp</dimen>
     <dimen name="card_radius_default">16dp</dimen>
     <dimen name="margin_min">8dp</dimen>
+    <dimen name="margin_extra_min">4dp</dimen>
 </resources>

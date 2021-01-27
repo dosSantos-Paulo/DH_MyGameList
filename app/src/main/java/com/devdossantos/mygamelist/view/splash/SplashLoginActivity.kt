@@ -1,4 +1,4 @@
-package com.devdossantos.mygamelist.view
+package com.devdossantos.mygamelist.view.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import com.devdossantos.mygamelist.R
+import com.devdossantos.mygamelist.view.main.MainActivity
+import com.devdossantos.mygamelist.view.register.RegisterActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputLayout

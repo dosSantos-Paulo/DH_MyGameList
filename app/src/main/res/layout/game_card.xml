@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_margin="@dimen/margin_min"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/card_radius_default">
+    android:layout_margin="@dimen/margin_extra_min"
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/image_gameCard"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@drawable/background" />
 
@@ -26,6 +26,7 @@
             android:layout_marginStart="@dimen/margin_min"
             android:layout_marginTop="@dimen/margin_min"
             android:text="@string/card_game_name_example"
+            android:textAllCaps="true"
             android:textStyle="bold" />
 
         <TextView
@@ -33,10 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_min"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="@dimen/margin_med"
+            android:layout_marginBottom="@dimen/margin_default"
             android:text="@string/card_game_created_example"
-            android:textColor="@color/gray_text" />
+            android:textColor="@color/gray_text"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
