@@ -14,9 +14,9 @@ import com.devdossantos.mygamelist.view.main.MainActivity
 import com.devdossantos.mygamelist.view.register.RegisterActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SplashLoginActivity : AppCompatActivity() {
 
@@ -32,13 +32,17 @@ class SplashLoginActivity : AppCompatActivity() {
 
     private val _password by lazy { findViewById<TextInputLayout>(R.id.textField_password_splashLogin) }
 
-    private var mAuth: FirebaseAuth? = null
+    private var _mAuth = FirebaseAuth.getInstance()
+
+    private val _user = _mAuth?.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_login)
 
-        mAuth = FirebaseAuth.getInstance()
+        if (_user != null) {
+            toHome()
+        }
 
         splashScreenAnimation()
 
@@ -89,7 +93,7 @@ class SplashLoginActivity : AppCompatActivity() {
     }
 
     private fun signInFirebase(email: String, password: String) {
-        mAuth!!.signInWithEmailAndPassword(email, password)
+        _mAuth!!.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(
                 this
             ) { task ->

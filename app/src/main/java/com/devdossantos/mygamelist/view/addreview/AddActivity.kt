@@ -2,12 +2,15 @@ package com.devdossantos.mygamelist.view.addreview
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.devdossantos.mygamelist.R
+import com.devdossantos.mygamelist.gamereview.model.GameReviewModel
 import com.devdossantos.mygamelist.util.Constants.CONTEXT_RESQUEST_CODE
 import com.devdossantos.mygamelist.util.Constants.CREATED_AT
 import com.devdossantos.mygamelist.util.Constants.DESCRIPTION
@@ -16,7 +19,12 @@ import com.devdossantos.mygamelist.util.Constants.NAME
 import com.devdossantos.mygamelist.view.main.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+
 
 class AddActivity : AppCompatActivity() {
 
@@ -43,6 +51,15 @@ class AddActivity : AppCompatActivity() {
     private var _bundleCreatedAt: String? = null
 
     private var _bundleDescription: String? = null
+
+    private val database = FirebaseDatabase.getInstance()
+
+    private val myRef = database.getReference("game-review")
+
+    private var user = FirebaseAuth.getInstance().currentUser!!
+
+    private val myStorage = FirebaseStorage.getInstance().getReference("game-review-picture")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,12 +102,38 @@ class AddActivity : AppCompatActivity() {
                 !_description.editText?.text.isNullOrEmpty() &&
                 _imageValidator
             ) {
-                Toast.makeText(this, "Send", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                val newReview = GameReviewModel(
+                    "${user.uid}${_title.editText!!.text}",
+                    _title.editText!!.text.toString(),
+                    _createdAt.editText!!.text.toString(),
+                    _description.editText!!.text.toString()
+                )
+                myRef.child(newReview.id).setValue(newReview)
+                upload(newReview.id)
+                toHome()
             }
         }
 
+    }
+
+    private fun upload(name: String){
+
+        _imageUri?.run {
+            myStorage.child(name).putFile(this)
+                .addOnSuccessListener {
+                    Log.d("FIREBASE_PIC", myStorage.toString())
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this@AddActivity,
+                        "ERROR: Upload Picture!!",
+                        Toast.LENGTH_LONG).show()
+                }
+        }
+    }
+    
+    private fun toHome() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

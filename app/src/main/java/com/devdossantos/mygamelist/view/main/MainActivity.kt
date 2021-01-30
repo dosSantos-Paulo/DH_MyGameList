@@ -1,8 +1,10 @@
 package com.devdossantos.mygamelist.view.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devdossantos.mygamelist.R
@@ -14,8 +16,14 @@ import com.devdossantos.mygamelist.util.Constants.NAME
 import com.devdossantos.mygamelist.view.addreview.AddActivity
 import com.devdossantos.mygamelist.view.gamedetail.DetailActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 
 class MainActivity : AppCompatActivity() {
+
 
     private val _addButton by lazy { findViewById<FloatingActionButton>(R.id.fab_add_main) }
 
@@ -24,12 +32,16 @@ class MainActivity : AppCompatActivity() {
     private val _recyclerView by lazy { findViewById<RecyclerView>(R.id.recyclerView_games_main) }
 
     private val _layoutManager = GridLayoutManager(this, 2)
+//
+//    private val database = FirebaseDatabase.getInstance()
+//
+//    private val myRef = database.getReference("GAME_REVIEW")
 
     private val _listAdapter = GameListAdapter(_gamesList) {
         val intent = Intent(this, DetailActivity::class.java)
 
         intent.putExtra(NAME,it.name)
-        intent.putExtra(IMAGE,it.imageUri)
+        intent.putExtra(IMAGE,it.id)
         intent.putExtra(DESCRIPTION,it.description)
         intent.putExtra(CREATED_AT,it.createdAt.toString())
 
@@ -40,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        createFakeList(10)
+        createFakeList(4)
 
         _recyclerView.apply {
             setHasFixedSize(true)
@@ -56,13 +68,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun createFakeList(amount: Int) {
 
         for (i in 1..amount) {
             _gamesList.add(
                 GameReviewModel(
                     "null",
-                    "Teste",
+                    "Exemplo",
                     "2020",
                     "Super game, criado para ser Fake"
                 )
