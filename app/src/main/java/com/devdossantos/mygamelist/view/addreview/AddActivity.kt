@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -20,13 +19,20 @@ import com.devdossantos.mygamelist.view.main.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
 
 class AddActivity : AppCompatActivity() {
+
+    data class Post (
+        val list: MutableList<String> = mutableListOf()
+    )
+    private val listModel: MutableList<String>? = null
 
     private var _imageUri: Uri? = null
 
@@ -54,7 +60,9 @@ class AddActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
 
-    private val myRef = database.getReference("game-review")
+    private val gameReviewRef = database.getReference("game-review")
+
+    private val gameIdsRef = database.getReference("game-id")
 
     private var user = FirebaseAuth.getInstance().currentUser!!
 
@@ -108,12 +116,33 @@ class AddActivity : AppCompatActivity() {
                     _createdAt.editText!!.text.toString(),
                     _description.editText!!.text.toString()
                 )
-                myRef.child(newReview.id).setValue(newReview)
+
+                gameReviewRef.child(newReview.id).setValue(newReview)
+                creatIdList(newReview)
                 upload(newReview.id)
                 toHome()
             }
         }
 
+    }
+
+    private fun creatIdList(newReview: GameReviewModel) {
+        gameIdsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                val value = p0.getValue(Post::class.java)
+                val newPost = Post()
+
+                value?.list?.forEach { string ->
+                    newPost.list.add(string)
+                }
+
+                newPost.list.add(newReview.id)
+
+                gameIdsRef.setValue(newPost)
+            }
+
+        })
     }
 
     private fun upload(name: String){
@@ -130,7 +159,7 @@ class AddActivity : AppCompatActivity() {
                 }
         }
     }
-    
+
     private fun toHome() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()

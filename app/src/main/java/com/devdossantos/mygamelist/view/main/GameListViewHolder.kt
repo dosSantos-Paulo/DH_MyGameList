@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devdossantos.mygamelist.R
 import com.devdossantos.mygamelist.gamereview.model.GameReviewModel
+import com.devdossantos.mygamelist.gamereview.model.GameReviewObjectModel
 
 class GameListViewHolder (
     private val _view: View
@@ -18,7 +19,7 @@ class GameListViewHolder (
     private val _createdAt by lazy { _view.findViewById<TextView>(R.id.txt_createdAt_gameCard) }
 
 
-    fun bind(game: GameReviewModel) {
+    fun bind(game: GameReviewObjectModel) {
         _title.text = game.name
         _createdAt.text = game.createdAt.toString()
     }
