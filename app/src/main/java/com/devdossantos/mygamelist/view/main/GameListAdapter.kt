@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.devdossantos.mygamelist.R
-import com.devdossantos.mygamelist.gamereview.model.GameReviewModel
 import com.devdossantos.mygamelist.gamereview.model.GameReviewObjectModel
 
 class GameListAdapter(
-    private val _gameList: List<GameReviewObjectModel>,
-    private val _listener: (GameReviewObjectModel) -> Unit
+    private val _gameList: MutableList<MainActivity.GameReviewObjectModel>,
+    private val _listener: (MainActivity.GameReviewObjectModel) -> Unit
 ) : RecyclerView.Adapter<GameListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameListViewHolder {

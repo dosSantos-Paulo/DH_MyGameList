@@ -2,14 +2,12 @@ package com.devdossantos.mygamelist.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devdossantos.mygamelist.R
-import com.devdossantos.mygamelist.gamereview.model.GameReviewModel
-import com.devdossantos.mygamelist.gamereview.model.GameReviewObjectModel
 import com.devdossantos.mygamelist.util.Constants.CREATED_AT
 import com.devdossantos.mygamelist.util.Constants.DESCRIPTION
 import com.devdossantos.mygamelist.util.Constants.IMAGE
@@ -27,18 +25,23 @@ import com.google.firebase.storage.FirebaseStorage
 
 class MainActivity : AppCompatActivity() {
 
+    data class Post (
+        var list: MutableList<String> = mutableListOf()
+    )
 
     data class GameReviewModel(
-        val createdAt: String = "",
-        val description: String = "",
-        val id: String = "",
-        val name: String = ""
+        var createdAt: String = "",
+        var description: String = "",
+        var id: String = "",
+        var name: String = ""
     )
 
-    data class ResponseModel(
-        val list: List<String>? = null
+    data class GameReviewObjectModel (
+        var imageUri: String = "",
+        var name: String = "",
+        var createdAt: String = "",
+        var description: String = ""
     )
-
 
     private val _addButton by lazy { findViewById<FloatingActionButton>(R.id.fab_add_main) }
 
@@ -52,33 +55,42 @@ class MainActivity : AppCompatActivity() {
 
     private val myRef = database.getReference("game-review")
 
-    private var user = FirebaseAuth.getInstance().currentUser!!
+    private val gameIdsRef = database.getReference("game-id")
 
     private val myStorage = FirebaseStorage.getInstance().getReference("game-review-picture")
 
-    private val _listAdapter = GameListAdapter(_gamesList) {
-        val intent = Intent(this, DetailActivity::class.java)
+    private var user = FirebaseAuth.getInstance().currentUser!!
 
-        intent.putExtra(NAME, it.name)
-        intent.putExtra(IMAGE, it.imageUri)
-        intent.putExtra(DESCRIPTION, it.description)
-        intent.putExtra(CREATED_AT, it.createdAt)
+    private val newPost = Post()
 
-        startActivity(intent)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        getPosts()
 
-        createFakeList(1)
-        _recyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = _layoutManager
-            adapter = _listAdapter
-        }
+        getIds()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            val _listAdapter = GameListAdapter(_gamesList) {
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+
+                intent.putExtra(NAME, it.name)
+                intent.putExtra(IMAGE, it.imageUri)
+                intent.putExtra(DESCRIPTION, it.description)
+                intent.putExtra(CREATED_AT, it.createdAt)
+
+                startActivity(intent)
+            }
+
+            _recyclerView.apply {
+                setHasFixedSize(true)
+                layoutManager = _layoutManager
+                adapter = _listAdapter
+            }
+
+        }, 5000)
+
 
         _addButton.setOnClickListener {
 
@@ -88,41 +100,35 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getPosts() {
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(Any::class.java)
+    private fun getIds(){
 
-                value as ResponseModel
-                println(value.list)
+        gameIdsRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                val value = p0.getValue(AddActivity.Post::class.java)
 
-//                if (value != null) {
-//                    value.list.forEach { item ->
-//
-//
-////                        myStorage.child(item.value.id).downloadUrl.addOnSuccessListener {
-////                            _gamesList.add(
-////                                GameReviewObjectModel(
-////                                    it.toString(),
-////                                    item.value.name,
-////                                    item.value.createdAt,
-////                                    item.value.description
-////                                )
-////                            )
-////                        }
-//                    }
-//                } else {
-//
-//                }
+                value?.list?.forEach {
+                    myRef.child(it).addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            val value = dataSnapshot.getValue(GameReviewModel::class.java)!!
+                            myStorage.child(value.id).downloadUrl.addOnSuccessListener {
+                                _gamesList.add(
+                                    GameReviewObjectModel(
+                                        it.toString(),
+                                        value.name,
+                                        value.createdAt,
+                                        value.description
+                                    )
+                                )
+                            }
+                        }
 
-
+                        override fun onCancelled(error: DatabaseError) {}
+                    })
+                }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-
-            }
         })
-
     }
 
     private fun createFakeList(amount: Int) {
