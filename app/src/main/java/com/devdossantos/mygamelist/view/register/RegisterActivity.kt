@@ -3,10 +3,13 @@ package com.devdossantos.mygamelist.view.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.devdossantos.mygamelist.R
 import com.devdossantos.mygamelist.view.main.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,9 +23,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private val _repeatePassword by lazy { findViewById<TextInputLayout>(R.id.textField_repeatPassword_register) }
 
+    private var mAuth: FirebaseAuth? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        mAuth = FirebaseAuth.getInstance()
 
         _createAcctountButton.setOnClickListener {
 
@@ -38,20 +45,59 @@ class RegisterActivity : AppCompatActivity() {
                 _password.editText?.error = getString(R.string.password_error)
             }
 
-            if (_repeatePassword.editText?.text?.trim().toString() != _password.editText?.text?.trim().toString()) {
+            if (_repeatePassword.editText?.text?.trim()
+                    .toString() != _password.editText?.text?.trim().toString()
+            ) {
                 _repeatePassword.editText?.error = getString(R.string.repeat_password_error)
             }
 
             if (!_name.editText?.text.isNullOrEmpty() &&
                 !_email.editText?.text.isNullOrEmpty() &&
                 !_password.editText?.text.isNullOrEmpty() &&
-                _repeatePassword.editText?.text?.trim().toString() == _password.editText?.text?.trim().toString()
+                _repeatePassword.editText?.text?.trim()
+                    .toString() == _password.editText?.text?.trim().toString()
             ) {
-                intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                signUpFirebase(
+                    _email.editText?.text.toString(),
+                    _password.editText?.text.toString()
+                )
             }
-
         }
+    }
 
+    private fun toHome() {
+        intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun signUpFirebase(email: String, password: String) {
+        mAuth!!.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(
+                this
+            ) { task ->
+                if (task.isSuccessful) {
+                    toHome()
+                    Log.d("FIREBASE", "createUserWithEmail:success")
+
+                } else {
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "SignIn Error",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    Log.w(
+                        "FIREBASE",
+                        "createUserWithEmail:failure",
+                        task.exception
+                    )
+                    Toast.makeText(
+                        this@RegisterActivity, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+
+            }
     }
 }

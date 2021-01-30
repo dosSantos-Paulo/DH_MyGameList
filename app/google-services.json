@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "196273937499",
+    "project_id": "mygamereview-ee686",
+    "storage_bucket": "mygamereview-ee686.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196273937499:android:730f4afe8dc38b3f79337e",
+        "android_client_info": {
+          "package_name": "com.devdossantos.mygamelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196273937499-fm2p1tj51ppt9p7uk3abq8sm09ujj6nq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devdossantos.mygamelist",
+            "certificate_hash": "d0d61afbb8391d1a4da48109b1ce5f61959e9f3b"
+          }
+        },
+        {
+          "client_id": "196273937499-17vtjia1gt18l6v9jd2p8qkqp09ja809.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdbZMJNl_2MItA4sL8ej8761r4pRBrwBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196273937499-17vtjia1gt18l6v9jd2p8qkqp09ja809.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
